@@ -36,6 +36,7 @@ public class BookService {
                     existing.setTitle(updatedBook.getTitle());
                     existing.setAuthor(updatedBook.getAuthor());
                     existing.setPrice(updatedBook.getPrice());
+                    existing.setAmount(updatedBook.getAmount());
                     return bookRepository.save(existing);
                 }).orElseThrow(() -> new RuntimeException("There is no such a book with the following id" + id));
     }
