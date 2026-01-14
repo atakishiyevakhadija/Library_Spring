@@ -5,6 +5,7 @@ import com.library.dea.entity.Book;
 import com.library.dea.repository.BookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -28,6 +29,15 @@ public class BookService {
     public Book showById(@PathVariable Integer id){
         return bookRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("There is no such a Book!"));
+    }
+    public Book update(@PathVariable Integer id, @RequestBody Book updatedBook){
+        return bookRepository.findById(id)
+                .map(existing -> {
+                    existing.setTitle(updatedBook.getTitle());
+                    existing.setAuthor(updatedBook.getAuthor());
+                    existing.setPrice(updatedBook.getPrice());
+                    return bookRepository.save(existing);
+                }).orElseThrow(() -> new RuntimeException("There is no such a book with the following id" + id));
     }
 
     //delete method (DELETE)
