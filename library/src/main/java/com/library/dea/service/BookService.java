@@ -25,6 +25,24 @@ public class BookService {
     public List<Book> showAll(){
         return bookRepository.findAll();
     }
+
+
+    public List<Book> getAllByTitle(@PathVariable String title){
+        return bookRepository.findByTitle(title);
+    }
+
+    public List<Book> getAllByAuthor(@PathVariable String author){
+        return bookRepository.findByAuthor(author);
+    }
+
+    public List<Book> getAllByMinPrice(@PathVariable Double price){
+        return bookRepository.findByMinPrice(price);
+    }
+
+    public List<Book> getAllByMinAmount(@PathVariable Integer amount){
+        return bookRepository.findByMinAmount(amount);
+    }
+
     //show book by id (GET)
     public Book showById(@PathVariable Integer id){
         return bookRepository.findById(id)
