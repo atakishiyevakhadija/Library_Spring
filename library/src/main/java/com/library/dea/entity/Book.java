@@ -1,21 +1,24 @@
 package com.library.dea.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "books")
 public class Book {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank(message = "Title обязательно!!!")
    private String title;
+    @NotBlank(message = "Author обязательно!!!")
    private String author;
+    @NotNull(message = "Price обязательно!!!")
    private Double price;
-   private Integer amount;
+    @NotNull(message = "Amount обязательно!!!")
+    private Integer amount;
 
     public Book(){
 
