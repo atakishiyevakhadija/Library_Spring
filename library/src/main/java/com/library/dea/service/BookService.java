@@ -1,6 +1,7 @@
 package com.library.dea.service;
 
 
+import com.library.dea.dto.BookDTO;
 import com.library.dea.entity.Book;
 import com.library.dea.repository.BookRepository;
 import org.springframework.data.domain.Page;
@@ -36,29 +37,29 @@ public class BookService {
         return bookRepository.findAll(pageable);
     }
 
-    public List<Book> getAllByTitle(@PathVariable String title){
+    public List<Book> getAllByTitle(String title){
         return bookRepository.findByTitle(title);
     }
 
-    public List<Book> getAllByAuthor(@PathVariable String author){
+    public List<Book> getAllByAuthor(String author){
         return bookRepository.findByAuthor(author);
     }
 
-    public List<Book> getAllByMinPrice(@PathVariable Double price){
+    public List<Book> getAllByMinPrice(Double price){
         return bookRepository.findByMinPrice(price);
     }
 
-    public List<Book> getAllByMinAmount(@PathVariable Integer amount){
+    public List<Book> getAllByMinAmount(Integer amount){
         return bookRepository.findByMinAmount(amount);
     }
 
     //show book by id (GET)
-    public Book showById(@PathVariable Integer id){
+    public Book showById(Integer id){
         return bookRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("There is no such a Book!"));
     }
 
-    public Book update(@PathVariable Integer id, @RequestBody Book updatedBook){
+    public Book update(Integer id, Book updatedBook){
         return bookRepository.findById(id)
                 .map(existing -> {
                     existing.setTitle(updatedBook.getTitle());
@@ -70,7 +71,7 @@ public class BookService {
     }
 
     //delete method (DELETE)
-    public void deleteBook(@PathVariable Integer id){
+    public void deleteBook(Integer id){
         bookRepository.deleteById(id);
     }
 
