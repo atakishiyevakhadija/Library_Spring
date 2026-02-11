@@ -3,6 +3,7 @@ package com.library.dea.service;
 
 import com.library.dea.dto.BookDTO;
 import com.library.dea.entity.Book;
+import com.library.dea.mapper.BookMapper;
 import com.library.dea.repository.BookRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -85,5 +86,10 @@ public class BookService {
     public Page<Book> search(String keyword, int page, int size){
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
         return bookRepository.findByTitleContainingIgnoreCase(keyword, pageable);
+    }
+
+    public void saveDto(BookDTO bookDTO){
+        Book entity = BookMapper.toEntity(bookDTO);
+        bookRepository.save(entity);
     }
 }

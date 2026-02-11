@@ -58,12 +58,12 @@ public class BookPageController {
     //save
     @PostMapping
     public String save(
-            @Valid @ModelAttribute BookDTO bookDTO,
+            @Valid @ModelAttribute("book") BookDTO bookDTO,
             BindingResult bindingResult){
         if(bindingResult.hasErrors()){
            return bookDTO.getId() == null ? "library/new" : "library/edit";
         }
-        bookService.add(BookMapper.toEntity(bookDTO));
+        bookService.saveDto(bookDTO);
         return "redirect:/books";
     }
 

@@ -78,6 +78,7 @@
     }
     input:focus{
     background-color: black;
+    color: white;
     }
 </style>
     <h2>Book List</h2>
@@ -124,6 +125,7 @@
                th:text="${i + 1}"
                style="${i == currentPage} ? 'font-weight:bold' : ''">
             </a>
+
 
 <!--               если обычный список-->
              <a th:if="${keyword == null}"
