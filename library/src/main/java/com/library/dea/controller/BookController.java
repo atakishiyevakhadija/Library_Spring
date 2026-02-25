@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/books")
-@Tag(name = "Books API", description = "Operations for books")
+@Tag(name = "Books API", description = "CRUD operations for books")
 public class BookController {
     private final BookService bookService;
 
@@ -44,35 +44,42 @@ public class BookController {
     }
 
     @GetMapping("/find/title/{title}")
+    @Operation(summary = "Get All Books By Title")
     public List<Book> getAllBooksByTitle(@PathVariable String title){
         return bookService.getAllByTitle(title);
     }
 
     @GetMapping("/find/author/{author}")
+    @Operation(summary = "Get All Books By Author")
     public List<Book> getAllBooksByAuthor(@PathVariable String author){
         return bookService.getAllByAuthor(author);
     }
 
     @GetMapping("/find/price/{minPrice}")
+    @Operation(summary = "Get All Books By Price")
     public List<Book> getAllByMinPrice(@PathVariable Double minPrice){
         return bookService.getAllByMinPrice(minPrice);
     }
 
     @GetMapping("/find/amount/{minAmount}")
+    @Operation(summary = "Get All Books By Amount")
     public List<Book> getAllByMinAmount(@PathVariable Integer minAmount){
         return bookService.getAllByMinAmount(minAmount);
     }
 
     @PostMapping("/add")
+    @Operation(summary = "Add Books")
     public Book createBook(@RequestBody Book book){
         return bookService.add(book);
     }
     @PutMapping("/update/{id}")
+    @Operation(summary = "Update Books")
     public Book updateBook(@PathVariable Integer id, @RequestBody BookDTO bookDTO){
         return bookService.update(id, bookDTO);
     }
 
     @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Delete Books")
     public void deleteBookById(@PathVariable Integer id){
         bookService.deleteBook(id);
     }
