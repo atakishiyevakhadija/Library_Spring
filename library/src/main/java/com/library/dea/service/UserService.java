@@ -25,6 +25,9 @@ public class UserService {
         User user = new User();
         user.setUsername(form.getUsername());
         user.setPassword(passwordEncoder.encode(form.getPassword()));
+        if(!form.getPassword().equals(form.getConfirmPassword())){
+            throw new RuntimeException("Пароли не совпадают!");
+        }
         user.setRole("ROLE_USER");
 
         userRepository.save(user);
