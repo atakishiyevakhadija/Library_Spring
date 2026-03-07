@@ -25,5 +25,100 @@
 
        <button type="submit">Create Account</button>
    </form>
+
+   <p>
+       <a th:href="@{/login}">Back to login</a>
+   </p>
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    display: flex;
+    flex-direction: column;   /* ВАЖНО */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Заголовок */
+h2 {
+    color: white;
+    text-align: center;
+}
+
+/* Форма */
+form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    width: 320px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Отступы блоков */
+form div {
+    margin-bottom: 15px;
+}
+
+/* Лейблы */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Инпуты */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #2a5298;
+    outline: none;
+    box-shadow: 0 0 5px rgba(42, 82, 152, 0.4);
+}
+
+/* Кнопка */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2a5298;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #1e3c72;
+}
+
+/* Ссылка под формой */
+p {
+    margin-top: 15px;
+    text-align: center;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+</style>
 </body>
 </html>

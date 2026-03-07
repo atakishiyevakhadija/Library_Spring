@@ -15,7 +15,7 @@ public class RegisterForm {
     @NotBlank
     @Size(min = 8, max = 50)
     @Pattern(
-            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*//d)(?=.*[!@#$%^&*]).{8,}$",
+            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,}$",
             message = "Password слишком слабый! Нужны цифры, разные регистры спецзначения."
     )
     private String password;

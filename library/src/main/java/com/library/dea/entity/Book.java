@@ -2,8 +2,6 @@ package com.library.dea.entity;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "books")
@@ -12,7 +10,10 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
    private String title;
-   private String author;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
+//   private String author;
    private Double price;
     private Integer amount;
 
@@ -20,9 +21,8 @@ public class Book {
 
     }
 
-    public Book(String title, String author, Double price, Integer amount){
+    public Book(String title, Double price, Integer amount){
         this.title = title;
-        this.author = author;
         this.price = price;
         this.amount = amount;
     }
@@ -50,19 +50,19 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public Double getPrice() {
         return price;
     }
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 }
