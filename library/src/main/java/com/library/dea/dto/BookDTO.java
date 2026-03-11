@@ -5,8 +5,8 @@ import jakarta.validation.constraints.*;
 
 public class BookDTO {
     private Integer id;
-    @NotBlank(message = "Title обязательно!!!")
-    @Size(min = 2, max = 100, message = "Title must be 2-100 characters")
+    @NotBlank(message = "{error.notblank}")
+    @Size(min = 2, max = 100, message = "{error.size}")
     private String title;
 
 //    @NotBlank(message = "Author обязательно!!!")
@@ -14,13 +14,13 @@ public class BookDTO {
 //    private String author;
 
 
-    @NotNull(message = "Price обязательно!!!")
+    @NotNull(message = "{error.notblank}")
 //    @DecimalMin(value = "0.01", message = "Price must be at least 0.01")
 //    @Digits(integer = 10, fraction = 2, message = "Price format: up to 10 digits and 2 decimals")
     @ValidPrice
     private Double price;
 
-    @NotNull(message = "Amount обязательно!!!")
+    @NotNull(message = "{error.notblank}")
     @Min(value = 1, message = "Amount must be at least 1")
     @Max(value = 1000, message = "Max amount must be not more than 1000")
     private Integer amount;

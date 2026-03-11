@@ -81,13 +81,17 @@
     color: white;
     }
 </style>
-    <h2>Book List</h2>
+    <h2 th:text="#{app.title}"></h2>
+
+<a th:href="@{?lang=en}">EN</a>
+<a th:href="@{?lang=ru}">RU</a>
+<a th:href="@{?lang=az}">AZ</a>
 
      <form th:action="@{/logout}" method="post">
-         <button type="submit" style="margin-bottom: 40px;">Logout</button>
+         <button type="submit" style="margin-bottom: 40px; margin-top: 30px;" th:text="#{button.logout}"></button>
      </form>
 
-    <a th:if="${isAdmin}" th:href="@{/books/new}">+ Add New Book</a>
+    <a th:if="${isAdmin}" th:href="@{/books/new}" th:text="#{button.addbook}"></a>
 
     <br> <br>
 
@@ -96,17 +100,17 @@
                  name="keyword"
                  placeholder="Search by Title"
                  th:value="${keyword}">
-          <button type="submit">Search</button>
-          <a th:href="@{/books}" style="margin-left: 10px;">Reset</a>
+          <button type="submit" th:text="#{button.search}"></button>
+          <a th:href="@{/books}" style="margin-left: 10px;" th:text="#{button.reset}"></a>
       </form>
 
    <table border="1">
        <tr>
-           <th>Title</th>
-           <th>Author</th>
-           <th>Price</th>
-           <th>Amount</th>
-           <th th:if="${isAdmin}">Actions</th>
+           <th th:text="#{book.title}"></th>
+           <th th:text="#{book.author}"></th>
+           <th th:text="#{book.price}"></th>
+           <th th:text="#{book.amount}"></th>
+           <th th:if="${isAdmin}" th:text="#{book.actions}"></th>
        </tr>
        <tr th:each="book : ${books}">
            <td th:text="${book.title}"></td>
@@ -114,9 +118,9 @@
            <td th:text="${book.price}"></td>
            <td th:text="${book.amount}"></td>
            <td th:if="${isAdmin}">
-               <a th:href="@{/books/edit/{id}(id=${book.id})}">Edit</a>
+               <a th:href="@{/books/edit/{id}(id=${book.id})}" th:text="#{button.edit}"></a>
                <a th:href="@{/books/delete/{id}(id=${book.id})}"
-               onclick="return confirm('Are you sure?')">Delete</a>
+               onclick="return confirm('Are you sure?')" th:text="#{button.delete}">Delete</a>
            </td>
        </tr>
    </table>

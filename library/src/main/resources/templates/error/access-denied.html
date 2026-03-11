@@ -5,9 +5,12 @@
     <title>Access Denied</title>
 </head>
 <body>
-    <h2>403 - Access Denied</h2>
+<a th:href="@{?lang=en}">EN</a>
+<a th:href="@{?lang=ru}">RU</a>
+<a th:href="@{?lang=az}">AZ</a>
+    <h2 th:text="#{app.denied}"></h2>
     <p>У вас нет прав для этой страницы.</p>
 
-    <a th:href="@{/books}">Back to Books</a>
+    <a th:href="@{/books}" th:text="#{button.backto}"></a>
 </body>
 </html>

@@ -5,22 +5,22 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class RegisterForm {
-    @NotBlank
-    @Size(min = 4, max = 50)
+    @NotBlank(message = "{error.notblank}")
+    @Size(min = 4, max = 50, message = "{error.size}")
     @Pattern(
             regexp = "^[a-zA-Z0-9_]+$",
             message = "Username может содержать только буквы, цифры и '_'."
     )
     private String username;
     @NotBlank
-    @Size(min = 8, max = 50)
+    @Size(min = 8, max = 50, message = "{error.size}")
     @Pattern(
             regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,}$",
             message = "Password слишком слабый! Нужны цифры, разные регистры спецзначения."
     )
     private String password;
 
-    @NotBlank(message = "Подтвердите пароль!")
+    @NotBlank(message = "{error.notblank}")
     private String confirmPassword;
 
     public String getConfirmPassword() {

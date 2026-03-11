@@ -53,10 +53,12 @@
     </style>
 </head>
 <body>
-
-   <h2>Error 404</h2>
+<a th:href="@{?lang=en}">EN</a>
+<a th:href="@{?lang=ru}">RU</a>
+<a th:href="@{?lang=az}">AZ</a>
+   <h2 th:text="#{error.notfound}"></h2>
    <br>
    <p th:text="${errorMessage}"></p>
-   <a href="/books">Back</a>
+   <a href="/books" th:text="#{button.back}"></a>
 </body>
 </html>
