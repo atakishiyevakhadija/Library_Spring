@@ -34,38 +34,7 @@ public class BookController {
         return bookService.showAll();
     }
 
-    @GetMapping
-    public Page<Book> getBooks(
-            @RequestParam(defaultValue = "0")int page,
-            @RequestParam(defaultValue = "5")int size
-    ){
-        Pageable pageable = PageRequest.of(page, size);
-        return bookService.getBooks(pageable);
-    }
 
-    @GetMapping("/find/title/{title}")
-    @Operation(summary = "Get All Books By Title")
-    public List<Book> getAllBooksByTitle(@PathVariable String title){
-        return bookService.getAllByTitle(title);
-    }
-
-    @GetMapping("/find/author/{author}")
-    @Operation(summary = "Get All Books By Author")
-    public List<Book> getAllBooksByAuthor(@PathVariable String author){
-        return bookService.getAllByAuthor(author);
-    }
-
-    @GetMapping("/find/price/{minPrice}")
-    @Operation(summary = "Get All Books By Price")
-    public List<Book> getAllByMinPrice(@PathVariable Double minPrice){
-        return bookService.getAllByMinPrice(minPrice);
-    }
-
-    @GetMapping("/find/amount/{minAmount}")
-    @Operation(summary = "Get All Books By Amount")
-    public List<Book> getAllByMinAmount(@PathVariable Integer minAmount){
-        return bookService.getAllByMinAmount(minAmount);
-    }
 
     @PostMapping("/add")
     @Operation(summary = "Add Books")

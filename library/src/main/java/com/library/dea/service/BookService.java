@@ -4,103 +4,50 @@ package com.library.dea.service;
 import com.library.dea.dto.BookDTO;
 import com.library.dea.entity.Author;
 import com.library.dea.entity.Book;
-import com.library.dea.mapper.BookMapper;
-import com.library.dea.repository.AuthorRepository;
-import com.library.dea.repository.BookRepository;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 
-@Service
-public class BookService {
-    private final BookRepository bookRepository;
-    private final AuthorRepository authorRepository;
-    public BookService(BookRepository bookRepository, AuthorRepository authorRepository) {
-        this.bookRepository = bookRepository;
-        this.authorRepository = authorRepository;
-    }
+
+public interface BookService {
 
     //create method (POST)
-    public Book add(Book book){
-        return bookRepository.save(book);
-    }
+    public Book add(Book book);
     //show all books (GET)
-    public List<Book> showAll(){
-        return bookRepository.findAll();
-    }
+    public List<Book> showAll();
 
 
     //pagination
-    public Page<Book> getBooks(Pageable pageable){
-        return bookRepository.findAll(pageable);
-    }
+//    public Page<Book> getBooks(Pageable pageable);
+//
+//    public List<Book> getAllByTitle(String title);
+//
+//    public List<Book> getAllByAuthor(String author);
+//
+//    public List<Book> getAllByMinPrice(Double price);
+//
+//    public List<Book> getAllByMinAmount(Integer amount);
 
-    public List<Book> getAllByTitle(String title){
-        return bookRepository.findByTitle(title);
-    }
-
-    public List<Book> getAllByAuthor(String author){
-        return bookRepository.findByAuthor(author);
-    }
-
-    public List<Book> getAllByMinPrice(Double price){
-        return bookRepository.findByMinPrice(price);
-    }
-
-    public List<Book> getAllByMinAmount(Integer amount){
-        return bookRepository.findByMinAmount(amount);
-    }
-
-    public List<Author> getAllAuthors(){return authorRepository.findAll();}
+//    public List<Author> getAllAuthors();
 
     //show book by id (GET)
-    public Book showById(Integer id){
-        return bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("There is no such a Book!"));
-    }
+    public Book showById(Integer id);
 
-    public Author findAuthorById(Long id){
-        return authorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Author not found!"));
-    }
+//    public Author findAuthorById(Long id);
 
-    public Book update(Integer id, BookDTO updatedBook){
-        Book existing = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("No book with following id!"));
+    public Book update(Integer id, BookDTO updatedBook);
 
-        existing.setTitle(updatedBook.getTitle());
-        existing.setPrice(updatedBook.getPrice());
-        existing.setAmount(updatedBook.getAmount());
-        return bookRepository.save(existing);
+//delete method (DELETE)
+public void deleteBook(Integer id);
 
-    }
-    //delete method (DELETE)
-    public void deleteBook(Integer id){
-        bookRepository.deleteById(id);
-    }
+//Pagination
+public Page<Book> findPaginated(int page, int size);
 
-     //Pagination
-    public Page<Book> findPaginated(int page, int size){
-        Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
-        return bookRepository.findAll(pageable);
-    }
+//search
+public Page<Book> search(String keyword, int page, int size);
 
-    //search
-    public Page<Book> search(String keyword, int page, int size){
-        Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
-        return bookRepository.findByTitleContainingIgnoreCase(keyword, pageable);
-    }
-
-    public void saveDto(BookDTO bookDTO){
-        Book entity = BookMapper.toEntity(bookDTO);
-        Author author = authorRepository
-                .findById(bookDTO.getAuthorId())
-                .orElseThrow(() -> new RuntimeException("Author Not Found"));
-        entity.setAuthor(author);
-        bookRepository.save(entity);
-    }
+public void saveDto(BookDTO bookDTO);
 }
+
