@@ -2,6 +2,8 @@ package com.library.dea.service.impl;
 
 import com.library.dea.dto.RegisterForm;
 import com.library.dea.entity.User;
+import com.library.dea.exception.PasswordMismatchException;
+import com.library.dea.exception.UserAlreadyExistsException;
 import com.library.dea.repository.UserRepository;
 import com.library.dea.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,14 +23,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(RegisterForm form){
         if (userRepository.existsByUsername(form.getUsername())){
-            throw new RuntimeException("Username already exists");
+            throw new UserAlreadyExistsException("Username already exists");
         }
 
         User user = new User();
         user.setUsername(form.getUsername());
         user.setPassword(passwordEncoder.encode(form.getPassword()));
         if(!form.getPassword().equals(form.getConfirmPassword())){
-            throw new RuntimeException("Пароли не совпадают!");
+            throw new PasswordMismatchException("Пароли не совпадают!");
         }
         user.setRole("ROLE_USER");
 
