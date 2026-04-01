@@ -20,7 +20,7 @@ public interface BookService {
 
 
     //pagination
-//    public Page<Book> getBooks(Pageable pageable);
+    public Page<Book> getBooks(Pageable pageable);
 //
 //    public List<Book> getAllByTitle(String title);
 //

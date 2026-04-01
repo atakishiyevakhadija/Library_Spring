@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+</head>
+<body>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #f4f6f8;
+margin: 20px;
+}
+
+/* Заголовок */
+h1 {
+color: #333;
+margin-bottom: 20px;
+}
+
+/* Кнопка добавления */
+a[href*="/authors/new"] {
+display: inline-block;
+margin-bottom: 15px;
+padding: 8px 14px;
+background-color: #4CAF50;
+color: white;
+text-decoration: none;
+border-radius: 6px;
+transition: 0.3s;
+}
+
+a[href*="/authors/new"]:hover {
+background-color: #45a049;
+}
+
+/* Таблица */
+table {
+width: 100%;
+border-collapse: collapse;
+background-color: white;
+border-radius: 8px;
+overflow: hidden;
+}
+
+/* Заголовки */
+thead {
+background-color: #2c3e50;
+color: white;
+}
+
+th, td {
+padding: 12px;
+text-align: center;
+}
+
+/* Границы */
+table, th, td {
+border: 1px solid #ddd;
+}
+
+/* Чередование строк */
+tbody tr:nth-child(even) {
+background-color: #f9f9f9;
+}
+
+/* Hover эффект */
+tbody tr:hover {
+background-color: #f1f1f1;
+}
+
+/* Кнопки действий */
+td a {
+padding: 6px 10px;
+text-decoration: none;
+border-radius: 5px;
+margin: 0 3px;
+font-size: 14px;
+}
+
+/* Edit */
+td a[href*="/edit"] {
+background-color: #3498db;
+color: white;
+}
+
+td a[href*="/edit"]:hover {
+background-color: #2980b9;
+}
+
+/* Delete */
+td a[href*="/delete"] {
+background-color: #e74c3c;
+color: white;
+}
+
+td a[href*="/delete"]:hover {
+background-color: #c0392b;
+}
+</style>
+   <h1>Authors</h1>
+
+   <a th:href="@{/authors/new}">New Author</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="author : ${authors}">
+      <td th:text="${author.id}"></td>
+        <td th:text="${author.name}"></td>
+
+        <td>
+            <a th:href="@{/authors/edit/{id}(id=${author.id})}">Edit</a>
+            <a th:href="@{/authors/delete/{id}(id=${author.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

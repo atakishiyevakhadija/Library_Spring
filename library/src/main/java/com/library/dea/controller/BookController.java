@@ -5,9 +5,11 @@ import com.library.dea.entity.Book;
 import com.library.dea.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,35 +24,32 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @GetMapping
+    @Operation(summary = "Get All Books")
+    public Page<Book> getBooks(Pageable pageable){
+        return bookService.getBooks(pageable);
+    }
+
     @GetMapping("/{id}")
-    @Operation(summary = "Get Book By Id")
-    public Book getBook(@PathVariable Integer id){
+    @Operation(summary = "Get Book By ID")
+    public Book getBookById(@PathVariable Integer id){
         return bookService.showById(id);
     }
 
-    @GetMapping("/all")
-    @Operation(summary = "Get All Books")
-    public List<Book> getAllBooks(){
-        return bookService.showAll();
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create new book")
+    public void createBook(@Valid @RequestBody BookDTO bookDTO){
+        bookService.saveDto(bookDTO);
     }
 
-
-
-    @PostMapping("/add")
-    @Operation(summary = "Add Books")
-    public Book createBook(@RequestBody Book book){
-        return bookService.add(book);
-    }
-    @PutMapping("/update/{id}")
-    @Operation(summary = "Update Books")
-    public Book updateBook(@PathVariable Integer id, @RequestBody BookDTO bookDTO){
+    @PutMapping("/{id}")
+    @Operation(summary = "Update Book")
+    public Book updateBook(
+            @Valid
+            @PathVariable Integer id,
+            @RequestBody BookDTO bookDTO) {
         return bookService.update(id, bookDTO);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    @Operation(summary = "Delete Books")
-    public void deleteBookById(@PathVariable Integer id){
-        bookService.deleteBook(id);
     }
 }
 

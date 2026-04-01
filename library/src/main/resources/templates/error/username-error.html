@@ -5,6 +5,55 @@
     <title>Error</title>
 </head>
 <body>
+<style>
+    body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Заголовок */
+h2 {
+    color: #c0392b;
+    margin-bottom: 15px;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Сообщение */
+p {
+    background: white;
+    padding: 15px 25px;
+    margin: 0;
+    color: #555;
+    text-align: center;
+    width: 300px;
+}
+
+/* Кнопка */
+a {
+    display: inline-block;
+    margin-top: 0;
+    padding: 12px 25px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 0 0 10px 10px;
+    transition: 0.3s;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+a:hover {
+    background-color: #2980b9;
+}
+</style>
 <h2>409 - Username already exists</h2>
 <br>
 <p th:text="${errorMessage}"></p>

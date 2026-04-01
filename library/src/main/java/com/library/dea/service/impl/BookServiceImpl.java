@@ -39,6 +39,10 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findAll();
     }
 
+    @Override
+    public Page<Book> getBooks(Pageable pageable) {
+
+    }
 
 
     @Override
