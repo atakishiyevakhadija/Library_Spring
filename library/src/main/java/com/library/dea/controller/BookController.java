@@ -51,5 +51,11 @@ public class BookController {
             @RequestBody BookDTO bookDTO) {
         return bookService.update(id, bookDTO);
     }
+
+    @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Delete Book")
+    public void deleteBookById(@PathVariable Integer id){
+        bookService.deleteBook(id);
+    }
 }
 

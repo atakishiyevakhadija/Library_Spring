@@ -92,7 +92,8 @@
      </form>
 
     <a th:if="${isAdmin}" th:href="@{/books/new}" th:text="#{button.addbook}"></a>
-
+ <br> <br>
+  <a th:href="@{/authors}">Authors</a>
     <br> <br>
 
       <form th:action="@{/books/search}" method="get" style="margin-bottom: 15px;">
