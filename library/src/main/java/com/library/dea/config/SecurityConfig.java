@@ -26,12 +26,13 @@ public class SecurityConfig {
                          .permitAll()
                          .requestMatchers("/books/new", "/books/edit/**", "/books/delete/**")
                          .hasRole("ADMIN")
-                         .requestMatchers("/books/**")
+                         .requestMatchers("/api/books/**")
                          .hasAnyRole("USER", "ADMIN")
                          .anyRequest()
                          .authenticated()
 
-                 ).formLogin(form -> form
+                 )
+                 .formLogin(form -> form
                          .loginPage("/login")
                          .defaultSuccessUrl("/books", true)
                          .permitAll()
